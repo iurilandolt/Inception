@@ -6,7 +6,7 @@
 #    By: rlandolt <rlandolt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 10:50:25 by rlandolt          #+#    #+#              #
-#    Updated: 2024/10/08 14:22:16 by rlandolt         ###   ########.fr        #
+#    Updated: 2024/10/08 17:36:53 by rlandolt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ status :
 
 # sudo docker build -t nginx:42 .
 # sudo docker run -it --rm -p 8080:80 -p 443:443 --name nginx nginx:42
-# sudo sudo docker rmi nginx:42 
+# sudo docker rmi nginx:42 
 # sudo docker images
-#sudo docker ps -a
+# sudo docker ps -a
+# sudo docker compose -f docker-compose.yml up -d 
+# sudo docker compose -f docker-compose.yml down

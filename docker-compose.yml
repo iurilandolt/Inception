@@ -1,14 +1,24 @@
-version: '3.7'
+#version: '3.7'
 
 networks:
   inception:
     name: inception
 
+volumes:
+  db_data:
+    name: db_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./dependencies/mariadb/data
+
 services:
+
   nginx:
     container_name: nginx
     build: ./dependencies/nginx
-    image: nginx:latest
+    image: nginx:42
     env_file:
       - var.env
     networks:
@@ -16,14 +26,17 @@ services:
     ports:
       - "8080:80"
     restart: always
-  # mariadb:
-  #   container_name: mariadb
-  #   build: ./dependencies/mariadb
-  #   image: mariadb:latest
-  #   env_file:
-  #     - var.env
-  #   networks:
-  #     - inception
-  #   ports:
-  #     - "3306:3306"
-  #   restart: always
+  
+  mariadb:
+    container_name: mariadb
+    build: ./dependencies/mariadb
+    image: mariadb:42
+    env_file:
+      - var.env
+    networks:
+      - inception
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
