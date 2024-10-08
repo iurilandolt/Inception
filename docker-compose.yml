@@ -1,0 +1,17 @@
+version: '3.7'
+
+networks:
+  inception:
+    name: inception
+
+services:
+  nginx:
+    container_name: nginx
+    build: ./dependencies/nginx
+    image: nginx:latest
+    networks:
+      - inception
+    ports:
+      - "8080:80"
+    restart: always
+
