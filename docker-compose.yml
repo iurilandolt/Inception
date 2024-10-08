@@ -9,9 +9,21 @@ services:
     container_name: nginx
     build: ./dependencies/nginx
     image: nginx:latest
+    env_file:
+      - var.env
     networks:
       - inception
     ports:
       - "8080:80"
     restart: always
-
+  # mariadb:
+  #   container_name: mariadb
+  #   build: ./dependencies/mariadb
+  #   image: mariadb:latest
+  #   env_file:
+  #     - var.env
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "3306:3306"
+  #   restart: always

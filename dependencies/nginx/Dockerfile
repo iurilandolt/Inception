@@ -2,6 +2,12 @@ FROM debian:stable
 
 RUN apt-get update && apt-get install -y nginx && apt install openssl -y
 
-#COPY script.sh /
+#COPY nginx.conf /etc/nginx/nginx.conf
 
-#CMD ["/script.sh"]
+COPY script.sh /
+
+EXPOSE 80
+
+RUN chmod +x script.sh
+
+#CMD ["./script.sh"]

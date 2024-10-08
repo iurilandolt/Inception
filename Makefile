@@ -6,7 +6,7 @@
 #    By: rlandolt <rlandolt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 10:50:25 by rlandolt          #+#    #+#              #
-#    Updated: 2024/10/08 11:28:47 by rlandolt         ###   ########.fr        #
+#    Updated: 2024/10/08 14:22:16 by rlandolt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,3 +26,9 @@ stop :
 
 status : 
 	docker ps
+
+# sudo docker build -t nginx:42 .
+# sudo docker run -it --rm -p 8080:80 -p 443:443 --name nginx nginx:42
+# sudo sudo docker rmi nginx:42 
+# sudo docker images
+#sudo docker ps -a
