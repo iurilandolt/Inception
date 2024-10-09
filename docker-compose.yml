@@ -5,20 +5,20 @@ networks:
     name: inception
 
 volumes:
-  db_data:
-    name: db_data
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./dependencies/mariadb/data
-  wp_data:
-    name: wp_data
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./dependencies/wordpress/data
+  db_data: {}
+#     name: db_data
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./dependencies/mariadb/data
+#   wp_data:
+#     name: wp_data
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: ./dependencies/wordpress/data
 
 services:
 
@@ -37,27 +37,28 @@ services:
     restart: always
 
   wordpress:
+    depends_on:
+      - mariadb
     container_name: wordpress
     build: ./dependencies/wordpress
     image: wordpress:42
-    depends_on:
-      - mariadb
     env_file:
       - var.env
     networks:
       - inception
-    # ports:
-    #   - "9000:9000"
+    ports:
+       - "8080:80"
     volumes:
-      - wp_data:/var/www/html
+      #- wp_data:/var/www/html
+      ["./dependencies/wordpress/data:/var/www/html"]
     restart: always
 
   nginx:
+    depends_on:
+      - wordpress
     container_name: nginx
     build: ./dependencies/nginx
     image: nginx:42
-    depends_on:
-      - wordpress
     env_file:
       - var.env
     networks:
