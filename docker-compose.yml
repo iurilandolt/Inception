@@ -46,8 +46,8 @@ services:
       - var.env
     networks:
       - inception
-    ports:
-       - "8080:80"
+    # ports:
+    #    - "8080:80"
     volumes:
       #- wp_data:/var/www/html
       ["./dependencies/wordpress/data:/var/www/html"]
@@ -64,7 +64,9 @@ services:
     networks:
       - inception
     ports:
-      - "443:443"
-      # - "8080:80"
+      #- "443:443"
+      - "80:80"
+    volumes:
+      ["./dependencies/wordpress/data:/var/www/html"]
     restart: always
   
