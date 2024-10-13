@@ -1,6 +1,6 @@
 FROM debian:stable
 
-RUN apt-get update && apt upgrade && apt-get install -y wordpress curl php-fpm php-mysql
+RUN apt-get update && apt upgrade && apt-get install -y wordpress curl php-fpm php-mysqli
 
 COPY script.sh /
 
