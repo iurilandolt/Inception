@@ -42,7 +42,7 @@ services:
     networks:
       - inception
     ports:
-      - "80:80"
+      - "443:443"
     volumes:
       - ./data:/var/www/html
     restart: always
