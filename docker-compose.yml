@@ -14,7 +14,7 @@ services:
     networks:
       - inception
     volumes:
-     - ./data:/var/lib/mysql
+     - ./data/db:/var/lib/mysql
     restart: always
 
   wordpress:
@@ -28,7 +28,7 @@ services:
     networks:
       - inception
     volumes:
-      - ./data:/var/www/html
+      - ./data/wp:/var/www/html
     restart: always
 
   nginx:
@@ -44,6 +44,6 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./data:/var/www/html
+      - ./data/wp:/var/www/html
     restart: always
   
