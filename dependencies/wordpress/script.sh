@@ -14,6 +14,8 @@ wp config create --dbname="$WORDPRESS_DB_NAME" --dbuser="$WORDPRESS_DB_USER" --d
 
 wp core install --url=localhost --title="inception" --admin_user=wpcli --admin_password="$MYSQL_ROOT_PASSWORD" --admin_email=rlandolt@student.42lisboa.com --allow-root
 
+wp user create $WORDPRESS_DB_USER $WORDPRESS_DB_USER@localhost.com --role=author --user_pass=$WORDPRESS_DB_PASSWORD --allow-root
+
 php-fpm8.2 -F
 
 

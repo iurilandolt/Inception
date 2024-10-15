@@ -37,8 +37,8 @@ services:
     container_name: nginx
     build: ./dependencies/nginx
     image: nginx:42
-    env_file:
-      - var.env
+    # env_file:
+    #   - var.env
     networks:
       - inception
     ports:
