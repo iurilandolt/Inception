@@ -6,7 +6,7 @@
 #    By: rlandolt <rlandolt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 10:50:25 by rlandolt          #+#    #+#              #
-#    Updated: 2024/10/09 13:00:23 by rlandolt         ###   ########.fr        #
+#    Updated: 2024/10/16 16:55:01 by rlandolt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,3 +36,14 @@ status :
 # sudo docker compose -f docker-compose.yml down
 # sudo docker exec -it mariadb mysql -u maria -p 
 # sudo docker run -it --rm --env-file ../../var.env -p 3306:3306 --name mariadb mariadb:42
+
+# Use USE database_name; to select the database.
+# Use SHOW TABLES; to list all tables in the selected database.
+# Use DESCRIBE table_name; or SHOW COLUMNS FROM table_name; to see the structure of a table.
+# Use SELECT * FROM table_name; to view all entries in a table.
+# Feel free to replace table_name with the actual name of the table you want to explore.### Summary
+
+# Use USE database_name; to select the database.
+# Use SHOW TABLES; to list all tables in the selected database.
+# Use DESCRIBE table_name; or SHOW COLUMNS FROM table_name; to see the structure of a table.
+# Use SELECT * FROM table_name; to view all entries in a table

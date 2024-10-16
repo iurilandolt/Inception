@@ -4,6 +4,20 @@ networks:
   inception:
     name: inception
 
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./data/db
+      o: bind
+  wp_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./data/wp
+      o: bind
+
 services:
   mariadb:
     container_name: mariadb
@@ -14,7 +28,7 @@ services:
     networks:
       - inception
     volumes:
-     - ./data/db:/var/lib/mysql
+     - db_data:/var/lib/mysql
     restart: always
 
   wordpress:
@@ -28,7 +42,7 @@ services:
     networks:
       - inception
     volumes:
-      - ./data/wp:/var/www/html
+      - wp_data:/var/www/html
     restart: always
 
   nginx:
@@ -37,13 +51,11 @@ services:
     container_name: nginx
     build: ./dependencies/nginx
     image: nginx:42
-    # env_file:
-    #   - var.env
     networks:
       - inception
     ports:
       - "443:443"
     volumes:
-      - ./data/wp:/var/www/html
+      - wp_data:/var/www/html
     restart: always
   
