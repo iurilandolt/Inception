@@ -1,5 +1,54 @@
 #version: '3.7'
 
+services:
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    image: mariadb:42
+    networks:
+      - inception
+    volumes:
+     - db_data:/var/lib/mysql
+    secrets:
+      - dbname
+      - dbpsw
+      - dbusr
+      - dbusrpsw
+    restart: always
+
+  wordpress:
+    depends_on:
+      - mariadb
+    container_name: wordpress
+    build: ./requirements/wordpress
+    image: wordpress:42
+    networks:
+      - inception
+    volumes:
+      - wp_data:/var/www/html
+    secrets:
+      - dbname
+      - dbhost
+      - dbpsw
+      - wpmngr
+      - wpusr
+      - wpusrpsw
+    restart: always
+
+  nginx:
+    depends_on:
+      - wordpress
+    container_name: nginx
+    build: ./requirements/nginx
+    image: nginx:42
+    networks:
+      - inception
+    ports:
+      - "443:443"
+    volumes:
+      - wp_data:/var/www/html
+    restart: always
+  
 networks:
   inception:
     name: inception
@@ -18,44 +67,20 @@ volumes:
       device: ~/data/wp
       o: bind
 
-services:
-  mariadb:
-    container_name: mariadb
-    build: ./requirements/mariadb
-    image: mariadb:42
-    env_file:
-      - var.env
-    networks:
-      - inception
-    volumes:
-     - db_data:/var/lib/mysql
-    restart: always
-
-  wordpress:
-    depends_on:
-      - mariadb
-    container_name: wordpress
-    build: ./requirements/wordpress
-    image: wordpress:42
-    env_file:
-      - var.env
-    networks:
-      - inception
-    volumes:
-      - wp_data:/var/www/html
-    restart: always
-
-  nginx:
-    depends_on:
-      - wordpress
-    container_name: nginx
-    build: ./requirements/nginx
-    image: nginx:42
-    networks:
-      - inception
-    ports:
-      - "443:443"
-    volumes:
-      - wp_data:/var/www/html
-    restart: always
-  
+secrets:
+  dbname:
+    file: ../secrets/dbname.txt
+  dbpsw:
+    file: ../secrets/dbpsw.txt
+  dbusr:
+    file: ../secrets/dbusr.txt
+  dbusrpsw:
+    file: ../secrets/dbusrpsw.txt
+  dbhost:
+    file: ../secrets/dbhost.txt
+  wpmngr:
+    file: ../secrets/wpmngr.txt
+  wpusr:
+    file: ../secrets/wpusr.txt
+  wpusrpsw:
+    file: ../secrets/wpusrpsw.txt

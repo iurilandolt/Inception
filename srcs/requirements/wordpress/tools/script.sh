@@ -10,11 +10,13 @@ mv wp-cli.phar /usr/local/bin/wp
 
 wp core download --allow-root
 
-wp config create --dbname="$WORDPRESS_DB_NAME" --dbuser="$WORDPRESS_DB_USER" --dbpass="$WORDPRESS_DB_PASSWORD" --dbhost="$WORDPRESS_DB_HOST" --allow-root
+wp config create --dbname="$(cat /run/secrets/dbname)" --dbuser="$(cat /run/secrets/wpusr)" --dbpass="$(cat /run/secrets/wpusrpsw)" --dbhost="$(cat /run/secrets/dbhost)" --allow-root
 
-wp core install --url=localhost --title="inception" --admin_user=wpcli --admin_password="$MYSQL_ROOT_PASSWORD" --admin_email=rlandolt@student.42lisboa.com --allow-root
+wp core install --url=localhost --title="inception" --admin_user="$(cat /run/secrets/wpmngr)" --admin_password="$(cat /run/secrets/dbpsw)" --admin_email=rlandolt@student.42lisboa.com --allow-root
 
-wp user create $WORDPRESS_DB_USER "$WORDPRESS_DB_USER"@"$HOSTNAME".com --role=author --user_pass=$WORDPRESS_DB_PASSWORD --allow-root
+wp user create "$(cat /run/secrets/wpusr)" "$(cat /run/secrets/wpusr)"@"$HOSTNAME".com --role=author --user_pass="$(cat /run/secrets/wpusrpsw)" --allow-root
+
+rm -rf ~/run/secrets/
 
 php-fpm8.2 -F
 
