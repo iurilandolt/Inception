@@ -58,8 +58,8 @@ services:
     image: redis:42
     networks:
       - inception
-    volumes:
-      [./r_cache:/var/lib/redis]
+    # volumes:
+    #   - wp_data:/var/www/html
     restart: always
   
 networks:
