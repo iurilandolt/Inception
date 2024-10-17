@@ -9,19 +9,19 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ./data/db
+      device: /home/nemo/42/inception/data/db
       o: bind
   wp_data:
     driver: local
     driver_opts:
       type: none
-      device: ./data/wp
+      device: /home/nemo/42/inception/data/wp
       o: bind
 
 services:
   mariadb:
     container_name: mariadb
-    build: ./dependencies/mariadb
+    build: ./requirements/mariadb
     image: mariadb:42
     env_file:
       - var.env
@@ -35,7 +35,7 @@ services:
     depends_on:
       - mariadb
     container_name: wordpress
-    build: ./dependencies/wordpress
+    build: ./requirements/wordpress
     image: wordpress:42
     env_file:
       - var.env
@@ -49,7 +49,7 @@ services:
     depends_on:
       - wordpress
     container_name: nginx
-    build: ./dependencies/nginx
+    build: ./requirements/nginx
     image: nginx:42
     networks:
       - inception
