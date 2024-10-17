@@ -48,6 +48,19 @@ services:
     volumes:
       - wp_data:/var/www/html
     restart: always
+
+  redis:
+    depends_on:
+      - nginx
+      - wordpress
+    container_name: redis
+    build: ./requirements/bonus/redis
+    image: redis:42
+    networks:
+      - inception
+    volumes:
+      [./r_cache:/var/lib/redis]
+    restart: always
   
 networks:
   inception:
