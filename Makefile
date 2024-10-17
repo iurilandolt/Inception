@@ -6,13 +6,16 @@
 #    By: rlandolt <rlandolt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 10:50:25 by rlandolt          #+#    #+#              #
-#    Updated: 2024/10/17 11:37:01 by rlandolt         ###   ########.fr        #
+#    Updated: 2024/10/17 12:21:55 by rlandolt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 all : up
 
 up : 
+	mkdir -p ~/data
+	mkdir -p ~/data/wp
+	mkdir -p ~/data/db
 	docker-compose -f ./srcs/docker-compose.yml up -d
 
 down : 

@@ -9,13 +9,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/nemo/42/inception/data/db
+      device: ~/data/db
       o: bind
   wp_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/nemo/42/inception/data/wp
+      device: ~/data/wp
       o: bind
 
 services:
