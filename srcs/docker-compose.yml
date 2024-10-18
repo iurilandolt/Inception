@@ -61,6 +61,22 @@ services:
     # volumes:
     #   - wp_data:/var/www/html
     restart: always
+
+  vsftp:
+    depends_on:
+      - wordpress
+    container_name: vsftp
+    build: ./requirements/bonus/vsftp
+    image: vsftp:42
+    networks:
+      - inception
+    ports:
+      - "21:21"
+    #  - "21000:21000"
+    #  - "21001:21001"
+    volumes:
+      - wp_data:/var/www/html
+    restart: always
   
 networks:
   inception:
