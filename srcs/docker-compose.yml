@@ -76,6 +76,9 @@ services:
     #  - "21001:21001"
     volumes:
       - wp_data:/var/www/html
+    secrets:
+      - wpusr
+      - wpusrpsw
     restart: always
   
 networks:
