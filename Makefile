@@ -16,6 +16,8 @@ up :
 	mkdir -p ~/data
 	mkdir -p ~/data/wp
 	mkdir -p ~/data/db
+#	mkdir -p secrets
+#	touch secrets/dbname.txt secrets/dbpsw.txt secrets/dbusr.txt secrets/dbusrpsw.txt secrets/dbhost.txt secrets/wpmngr.txt secrets/wpusr.txt secrets/wpusrpsw.txt
 	docker-compose -f ./srcs/docker-compose.yml up -d
 
 down : 
