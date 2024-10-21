@@ -1,10 +1,12 @@
-FROM debian:stable
+FROM debian:bullseye
 
-RUN apt-get update && apt upgrade && apt-get install -y wordpress curl php-fpm php-mysqli
+RUN apt-get update && apt-get upgrade -y && apt-get install -y curl php-fpm php-mysqli
 
 COPY ./tools/script.sh /
 
-COPY ./conf/www.conf /etc/php/8.2/fpm/pool.d/.
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/.
+
+RUN mkdir -p /run/php
 
 RUN chmod +x script.sh
 

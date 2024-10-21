@@ -19,9 +19,9 @@ wp config set WP_REDIS_PORT 6379 --type=constant --raw --allow-root
 wp config set WP_CACHE true --type=constant --raw --allow-root
 wp redis enable --allow-root
 
-rm -rf ~/run/secrets/
+php-fpm7.4 -F
 
-php-fpm8.2 -F
+
 
 
 
