@@ -88,6 +88,23 @@ services:
     ports:
       - "8080:80"
     restart: always
+
+  netdata:
+    depends_on:
+      - nginx
+      - redis
+      - vsftp
+      - wordpress
+      - mariadb
+      - adminer
+    container_name: netdata
+    build: ./requirements/bonus/netdata
+    image: netdata:42
+    networks:
+      - inception
+    ports:
+      - "19999:19999"
+    restart: always
   
 networks:
   inception:
