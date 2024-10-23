@@ -6,7 +6,7 @@
 #    By: rlandolt <rlandolt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 10:50:25 by rlandolt          #+#    #+#              #
-#    Updated: 2024/10/22 19:16:45 by rlandolt         ###   ########.fr        #
+#    Updated: 2024/10/23 16:35:45 by rlandolt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ up :
 	mkdir -p ~/data/wp
 	mkdir -p ~/data/db
 #	mkdir -p secrets
-#	touch secrets/dbname.txt secrets/dbpsw.txt secrets/dbusr.txt secrets/dbusrpsw.txt secrets/dbhost.txt secrets/wpmngr.txt secrets/wpusr.txt secrets/wpusrpsw.txt
+#	touch secrets/dbname.txt secrets/dbpsw.txt secrets/dbusr.txt secrets/dbusrpsw.txt secrets/dbhost.txt secrets/wpmngr.txt secrets/wpusr.txt secrets/wpusrpsw.txt secrets/apikey.txt
 	docker-compose -f ./srcs/docker-compose.yml up -d
 
 down : 
