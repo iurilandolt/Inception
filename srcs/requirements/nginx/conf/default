@@ -73,6 +73,24 @@ server {
 	#}
 }
 
+server {
+    # SSL configuration for Node.js (static) website
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+    ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+    ssl_protocols TLSv1.2 TLSv1.3;
+
+    root /app/public;
+    index index.html;
+
+    server_name nodejs.example.com;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
+
 # server {
 # 	listen 80;
 # 	listen [::]:80;

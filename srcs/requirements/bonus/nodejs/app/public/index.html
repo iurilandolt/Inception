@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h1>POKEMON LIST</h1>
+
+	<div id="api-response"></div>
+
+	<script>
+		const fetchApiData = async () => {
+			const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=150');
+			if (!response.ok) {
+				throw new Error('Failed to fetch data');
+			}
+
+			const data = await response.json();
+			let index = 1;
+			for (const pokemon of data.results) {
+				const pokemonResponse = await fetch(pokemon.url);
+				if (!pokemonResponse.ok) {
+					throw new Error('Failed to fetch data');
+				}
+
+				const pokemonData = await pokemonResponse.json();
+				const img = document.createElement('img');
+				img.src = pokemonData.sprites.front_default;
+				img.alt = pokemonData.name;
+
+				const name = document.createElement('p');
+				name.textContent = `${index}. ${pokemonData.name}`;
+
+				const link = document.createElement('a');
+				link.href = `detail.html?name=${pokemonData.name}`;
+				link.appendChild(img);
+				link.appendChild(name);
+
+				const imgContainer = document.createElement('div');
+				imgContainer.className = 'img-container';
+				// imgContainer.appendChild(img);
+				// imgContainer.appendChild(name);
+				imgContainer.appendChild(link);
+
+
+				document.getElementById('api-response').appendChild(imgContainer);
+				index++;
+			}
+		}
+
+		fetchApiData();
+	</script>
+</body>
+
+</html>
+
+<style>
+	body {
+		font-family: 'Courier New', Courier, monospace;
+		margin: 0;
+		padding: 0;
+	}
+
+	h1 {
+		text-align: center;
+		margin-top: 50px;
+	}
+
+	#api-response {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 5px;
+		margin: 0 auto;
+		padding: 10px;
+		max-width: 80vw;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		background-color: #f9f9f9;
+	}
+
+	.img-container {
+		text-align: center;
+	}
+
+	.img-container img {
+		display: block;
+		margin: 0 auto;
+		width: 132px; 
+		height: 132px;
+	}
+
+	.img-container p {
+		margin: 5px 0 0;
+		font-size: 14px;
+		text-transform: capitalize;
+	}
+</style>

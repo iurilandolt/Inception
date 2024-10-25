@@ -47,6 +47,7 @@ services:
       - "443:443"
     volumes:
       - wp_data:/var/www/html
+      - ./requirements/bonus/nodejs/app:/app
     restart: unless-stopped
 
   redis:
@@ -108,6 +109,18 @@ services:
       - "19999:19999"
     secrets:
       - apikey
+    restart: unless-stopped
+
+  nodejs:
+    depends_on:
+      - nginx
+    container_name: nodejs
+    build: ./requirements/bonus/nodejs
+    image: nodejs:42
+    networks:
+      - inception
+    volumes:
+      - ./requirements/bonus/nodejs/app:/app
     restart: unless-stopped
   
 networks:

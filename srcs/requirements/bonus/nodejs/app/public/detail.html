@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<h1>POKEMON DETAILS</h1>
+
+	<div id="pokemon-details"></div>
+
+	<script>
+		const getQueryParam = (param) => {
+			const urlParams = new URLSearchParams(window.location.search);
+			return urlParams.get(param);
+		}
+
+		const fetchPokemonDetails = async () => {
+			const pokemonName = getQueryParam('name');
+			if (!pokemonName) {
+				document.getElementById('pokemon-details').textContent = 'No Pokémon specified';
+				return;
+			}
+
+			const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+			if (!response.ok) {
+				document.getElementById('pokemon-details').textContent = 'Failed to fetch Pokémon details';
+				return;
+			}
+
+			const pokemonData = await response.json();
+			const detailsContainer = document.createElement('div');
+			detailsContainer.className = 'details-container';
+
+			const img = document.createElement('img');
+			img.src = pokemonData.sprites.front_shiny;
+			img.alt = pokemonData.name;
+
+			const name = document.createElement('h2');
+			name.textContent = pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1);
+
+			const attributes = document.createElement('ul');
+			attributes.innerHTML = `
+				<li>Height: ${pokemonData.height} decimetres</li>
+				<li>Weight: ${pokemonData.weight / 10} kg</li>
+				<li>Types: ${pokemonData.types.map(type => type.type.name).join(', ')}</li>
+				<li>Abilities: ${pokemonData.abilities.map(ability => ability.ability.name).join(', ')}</li>
+                <li>Base Experience: ${pokemonData.base_experience}</li>`;
+
+			detailsContainer.appendChild(img);
+			detailsContainer.appendChild(name);
+			detailsContainer.appendChild(attributes);
+
+			document.getElementById('pokemon-details').appendChild(detailsContainer);
+		}
+		fetchPokemonDetails();
+	</script>
+</body>
+
+</html>
+
+<style>
+	body {
+		font-family: 'Courier New', Courier, monospace;
+		margin: 0;
+		padding: 0;
+	}
+
+	h1 {
+		text-align: center;
+		margin-top: 50px;
+	}
+
+	.details-container {
+		text-align: center;
+		margin-top: 20px;
+	}
+
+	.details-container img {
+		width: 150px;
+		height: 150px;
+	}
+
+	.details-container ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	.details-container li {
+		margin: 5px 0;
+	}
+</style>
