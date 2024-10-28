@@ -10,5 +10,9 @@ COPY ./tools/script.sh /
 
 RUN chmod +x script.sh
 
+RUN chown -R mysql:mysql /etc/mysql /var/lib/mysql /run/mysqld && chmod 755 /run/mysqld
+
+USER mysql
+
 CMD ["./script.sh"]
 
