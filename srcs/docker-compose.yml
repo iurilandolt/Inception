@@ -48,7 +48,6 @@ services:
       - "443:443"
     volumes:
       - wp_data:/var/www/html
-      - ./requirements/bonus/nodejs/app:/app
     restart: unless-stopped
 
 # bonus 

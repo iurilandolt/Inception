@@ -29,27 +29,31 @@
 			const detailsContainer = document.createElement('div');
 			detailsContainer.className = 'details-container';
 
-			const img = document.createElement('img');
-			img.src = pokemonData.sprites.front_shiny;
-			img.alt = pokemonData.name;
+			const imgFront = document.createElement('img');
+			imgFront.src = pokemonData.sprites.front_default;
+			imgFront.alt = `${pokemonData.name} front default`;
+
+			const imgBack = document.createElement('img');
+			imgBack.src = pokemonData.sprites.back_default;
+			imgBack.alt = `${pokemonData.name} back default`;
 
 			const name = document.createElement('h2');
 			name.textContent = pokemonData.name.charAt(0).toUpperCase() + pokemonData.name.slice(1);
 
 			const attributes = document.createElement('ul');
 			attributes.innerHTML = `
-				<li>Height: ${pokemonData.height} decimetres</li>
-				<li>Weight: ${pokemonData.weight / 10} kg</li>
-				<li>Types: ${pokemonData.types.map(type => type.type.name).join(', ')}</li>
-				<li>Abilities: ${pokemonData.abilities.map(ability => ability.ability.name).join(', ')}</li>
+                <li>Height: ${pokemonData.height} decimetres</li>
+                <li>Weight: ${pokemonData.weight / 10} kg</li>
+                <li>Types: ${pokemonData.types.map(type => type.type.name).join(', ')}</li>
+                <li>Abilities: ${pokemonData.abilities.map(ability => ability.ability.name).join(', ')}</li>
                 <li>Base Experience: ${pokemonData.base_experience}</li>`;
 
-			detailsContainer.appendChild(img);
+			detailsContainer.appendChild(imgFront);
+			detailsContainer.appendChild(imgBack);
 			detailsContainer.appendChild(name);
 			detailsContainer.appendChild(attributes);
 			document.getElementById('pokemon-details').appendChild(detailsContainer);
 		}
-		
 		fetchPokemonDetails();
 	</script>
 </body>
@@ -74,8 +78,10 @@
 	}
 
 	.details-container img {
-		width: 150px;
-		height: 150px;
+		width: 132px;
+		height: 132px;
+		display: block;
+		margin: 0 auto;
 	}
 
 	.details-container ul {
