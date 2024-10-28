@@ -66,65 +66,65 @@ services:
       - apikey
     restart: unless-stopped
 
-  vsftp:
-    depends_on:
-      - wordpress
-    container_name: vsftp
-    build: ./requirements/bonus/vsftp
-    image: vsftp:42
-    networks:
-      - inception
-    ports:
-      - "21:21"
-    volumes:
-      - wp_data:/var/www/html
-    secrets:
-      - wpusr
-      - wpusrpsw
-    restart: unless-stopped
+  # vsftp:
+  #   depends_on:
+  #     - wordpress
+  #   container_name: vsftp
+  #   build: ./requirements/bonus/vsftp
+  #   image: vsftp:42
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "21:21"
+  #   volumes:
+  #     - wp_data:/var/www/html
+  #   secrets:
+  #     - wpusr
+  #     - wpusrpsw
+  #   restart: unless-stopped
 
-  adminer:
-    depends_on:
-      - mariadb
-    container_name: adminer
-    build: ./requirements/bonus/adminer
-    image: adminer:42
-    networks:
-      - inception
-    ports:
-      - "8080:80"
-    restart: unless-stopped
+  # adminer:
+  #   depends_on:
+  #     - mariadb
+  #   container_name: adminer
+  #   build: ./requirements/bonus/adminer
+  #   image: adminer:42
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "8080:80"
+  #   restart: unless-stopped
 
-  netdata:
-    depends_on:
-      - nginx
-      - redis
-      - vsftp
-      - wordpress
-      - mariadb
-      - adminer
-    container_name: netdata
-    build: ./requirements/bonus/netdata
-    image: netdata:42
-    networks:
-      - inception
-    ports:
-      - "19999:19999"
-    secrets:
-      - apikey
-    restart: unless-stopped
+  # netdata:
+  #   depends_on:
+  #     - nginx
+  #     - redis
+  #     - vsftp
+  #     - wordpress
+  #     - mariadb
+  #     - adminer
+  #   container_name: netdata
+  #   build: ./requirements/bonus/netdata
+  #   image: netdata:42
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "19999:19999"
+  #   secrets:
+  #     - apikey
+  #   restart: unless-stopped
 
-  nodejs:
-    depends_on:
-      - nginx
-    container_name: nodejs
-    build: ./requirements/bonus/nodejs
-    image: nodejs:42
-    networks:
-      - inception
-    volumes:
-      - ./requirements/bonus/nodejs/app:/app
-    restart: unless-stopped
+  # nodejs:
+  #   depends_on:
+  #     - nginx
+  #   container_name: nodejs
+  #   build: ./requirements/bonus/nodejs
+  #   image: nodejs:42
+  #   networks:
+  #     - inception
+  #   volumes:
+  #     - ./requirements/bonus/nodejs/app:/app
+  #   restart: unless-stopped
   
 networks:
   inception:
