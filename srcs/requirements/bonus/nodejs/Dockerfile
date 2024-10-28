@@ -1,5 +1,9 @@
 FROM debian:bullseye
 
-RUN apt-get update 
+RUN apt-get update && apt install -y nodejs 
 
-CMD ["tail", "-f", "/dev/null"]
+COPY ./conf/server.js /
+
+CMD ["nodejs", "/server.js"]
+
+# CMD ["tail", "-f", "/dev/null"]

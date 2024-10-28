@@ -1,4 +1,4 @@
-#version: '3.7'
+# mandatory
 
 services:
   mariadb:
@@ -49,6 +49,8 @@ services:
       - wp_data:/var/www/html
       - ./requirements/bonus/nodejs/app:/app
     restart: unless-stopped
+
+# bonus 
 
   redis:
     depends_on:
